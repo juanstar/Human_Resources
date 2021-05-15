@@ -19,7 +19,8 @@ import javax.swing.table.DefaultTableModel;
  * @author j_sta
  */
 public class Read extends javax.swing.JFrame {
-    conexion con =new conexion();
+
+    conexion con = new conexion();
     Connection cn;
     Statement st;
     ResultSet rs;
@@ -33,7 +34,7 @@ public class Read extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Menu");
         this.setResizable(false);
-        
+
     }
 
     /**
@@ -95,6 +96,12 @@ public class Read extends javax.swing.JFrame {
 
         jLabel9.setText("HIRE DATE");
 
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+        });
+
         tablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -103,6 +110,11 @@ public class Read extends javax.swing.JFrame {
                 "id", "firstName", "lastName", "age", "email", "phoneNumber", "salary", "hireDate"
             }
         ));
+        tablaDatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaDatosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaDatos);
 
         txt_id.addActionListener(new java.awt.event.ActionListener() {
@@ -180,8 +192,18 @@ public class Read extends javax.swing.JFrame {
         });
 
         jButton4.setText("ELIMINAR");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         jButton5.setText("ACTUALIZAR");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("CONSULTAR");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -270,7 +292,7 @@ public class Read extends javax.swing.JFrame {
                                 .addComponent(jButton5)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,14 +344,16 @@ public class Read extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(47, 47, 47))
         );
 
         pack();
@@ -352,74 +376,73 @@ public class Read extends javax.swing.JFrame {
         // TODO add your handling code here:
         txt_id.setText("");
         txt_firstName.setText("");
-        txt_lastName.setText ("");
+        txt_lastName.setText("");
         txt_age.setText("");
         txt_phoneNumber.setText("");
         txt_email.setText("");
         txt_salary.setText("");
         txt_hireDate.setText("");
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txt_ageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ageActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txt_ageActionPerformed
 
     private void txt_ageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ageKeyTyped
         // TODO add your handling code here:
-        if (txt_age.getText().length()>1) {
+        if (txt_age.getText().length() > 1) {
             getToolkit().beep();
             evt.consume();
-            
-            
+
         }
         char solonumero = evt.getKeyChar();
         if (Character.isLetter(solonumero)) {
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "INGRESAR SOLO NUMEROS");
-            
+
         }
     }//GEN-LAST:event_txt_ageKeyTyped
 
     private void txt_idKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_idKeyTyped
         // TODO add your handling code here:
-         char solonumero = evt.getKeyChar();
+        char solonumero = evt.getKeyChar();
         if (Character.isLetter(solonumero)) {
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "INGRESAR SOLO NUMEROS");
-            
+
         }
     }//GEN-LAST:event_txt_idKeyTyped
 
     private void txt_phoneNumberKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_phoneNumberKeyTyped
         // TODO add your handling code here:
-        if (txt_phoneNumber.getText().length()>=10) {
+        if (txt_phoneNumber.getText().length() >= 10) {
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "EL NUMERO DE TELEFONO DEBE SER DE 10 DIGITOS");
-            
+
         }
-         char solonumero = evt.getKeyChar();
-              
-        if (Character.isLetter(solonumero)){
+        char solonumero = evt.getKeyChar();
+
+        if (Character.isLetter(solonumero)) {
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "INGRESAR SOLO NUMEROS ENTEROS");
-            
+
         }
     }//GEN-LAST:event_txt_phoneNumberKeyTyped
 
     private void txt_salaryKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_salaryKeyTyped
         // TODO add your handling code here:
-         char solonumero = evt.getKeyChar();
+        char solonumero = evt.getKeyChar();
         if (Character.isLetter(solonumero)) {
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "INGRESAR SOLO NUMEROS");
-            
+
         }
     }//GEN-LAST:event_txt_salaryKeyTyped
 
@@ -430,42 +453,91 @@ public class Read extends javax.swing.JFrame {
 
     private void txt_firstNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_firstNameKeyTyped
         // TODO add your handling code here:
-         char sololetras =evt.getKeyChar();
+        char sololetras = evt.getKeyChar();
         if (Character.isDigit(sololetras)) {
-             getToolkit().beep();
+            getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "INGRESAR SOLO LETRAS");
-            
+
         }
         char solomayusculas = evt.getKeyChar();
         if (Character.isLowerCase(solomayusculas)) {
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "INGRESAR SOLO MAYUSCULAS");
-            
-            
+
         }
     }//GEN-LAST:event_txt_firstNameKeyTyped
 
     private void txt_lastNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_lastNameKeyTyped
         // TODO add your handling code here:
-        char sololetras =evt.getKeyChar();
+        char sololetras = evt.getKeyChar();
         if (Character.isDigit(sololetras)) {
-             getToolkit().beep();
+            getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "INGRESAR SOLO LETRAS");
-            
+
         }
         char solomayusculas = evt.getKeyChar();
         if (Character.isLowerCase(solomayusculas)) {
             getToolkit().beep();
             evt.consume();
-            JOptionPane.showMessageDialog(null, "INGRESAR SOLO MAYUSCULAS");}
+            JOptionPane.showMessageDialog(null, "INGRESAR SOLO MAYUSCULAS");
+        }
+
     }//GEN-LAST:event_txt_lastNameKeyTyped
 
     private void txt_phoneNumberPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txt_phoneNumberPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_phoneNumberPropertyChange
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        actualizar();
+        listar();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void tablaDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDatosMouseClicked
+        // TODO add your handling code here:
+        int fila = tablaDatos.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "NO HAS SELECCIONADO EL USUARIO");
+
+        } else {
+            int row = Integer.parseInt((String) tablaDatos.getValueAt(fila, 0).toString());
+
+            int id = Integer.parseInt((String) tablaDatos.getValueAt(fila, 0).toString());
+
+            String firstName = (String) tablaDatos.getValueAt(fila, 1);
+            String lastName = (String) tablaDatos.getValueAt(fila, 2);
+            int age = Integer.parseInt((String) tablaDatos.getValueAt(fila, 3).toString());
+            String email = (String) tablaDatos.getValueAt(fila, 4);
+            int phoneNumber = Integer.parseInt((String) tablaDatos.getValueAt(fila, 5).toString());
+            double salary = Double.parseDouble((String) tablaDatos.getValueAt(fila, 6).toString());
+            String hireDate = (String) tablaDatos.getValueAt(fila, 7);
+
+            txt_id.setText("" + id);
+            txt_firstName.setText("" + firstName);
+            txt_lastName.setText("" + lastName);
+            txt_age.setText("" + age);
+            txt_email.setText("" + email);
+            txt_phoneNumber.setText("" + phoneNumber);
+            txt_salary.setText("" + salary);
+            txt_hireDate.setText("" + hireDate);
+        }
+
+    }//GEN-LAST:event_tablaDatosMouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        eliminar();
+    }//GEN-LAST:event_jButton4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -488,7 +560,7 @@ public class Read extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        
+
         //</editor-fold>
         //</editor-fold>
 
@@ -497,69 +569,116 @@ public class Read extends javax.swing.JFrame {
             new Read().setVisible(true);
         });
     }
-    void listar(){
-     String sql ="select * from hr.employee";
-     
-     try{
-         cn =con.getConnection();
-         st = cn.createStatement();
-         rs = st.executeQuery(sql);
-         Object[] empleado = new Object [8];
-         modelo = (DefaultTableModel)tablaDatos.getModel();
-         
-         while (rs.next()){
-             empleado [0]=rs.getInt("id");
-             empleado [1]=rs.getString("firstName");
-             empleado [2]=rs.getString("lastName");
-             empleado [3]=rs.getInt("age");
-             empleado [4]=rs.getString("email");
-             empleado [5]=rs.getInt("phoneNumber");
-             empleado [6]=rs.getDouble("salary");
-             empleado [7]=rs.getString("hireDate");
-             
-             modelo.addRow(empleado);
-         } 
-         tablaDatos.setModel(modelo);
-     } catch (SQLException e){
-     }
-    }
-    void Agregar(){
-    int id = Integer.parseInt(txt_id.getText());
-    
-    String firstName = txt_firstName.getText();
-    String lastName = txt_lastName.getText();
-    int age = Integer.parseInt(txt_age.getText());
-    String email = txt_email.getText();
-    int phoneNumber = Integer.parseInt(txt_phoneNumber.getText());
-    Double salary = Double.parseDouble(txt_salary.getText());
-    String hireDate = (txt_hireDate.getText().trim());
-    
-    try{
-        String sql = "INSERT INTO hr.employee(id, firstName, lastName, age, email, phoneNumber, salary, hireDate) values('" + id + "', '" + firstName + "', '" + lastName + "', '" + age + "', '" + email + "', '" + phoneNumber + "', '" + salary + "', '" + hireDate + "')";
-                
-        cn = con.getConnection();
-        st = cn.createStatement();
-        st.executeUpdate(sql);
-        
-        JOptionPane.showMessageDialog(null, "DATOS GUARDADOS CORRECTAMENTE");
-        limpiartable();
-              
-        
-    } catch (HeadlessException | SQLException E){
-        JOptionPane.showMessageDialog(null, "DATOS NO SE GUARDARON CORRECTAMENTE");
-    
-    }
-    
-}
-    void limpiartable(){
-        for (int i = 0; i <= tablaDatos.getRowCount(); i++) {
-            modelo.removeRow(i);
-            i=i-1;
-          
-           
+
+    void listar() {
+        String sql = "select * from hr.employee";
+
+        try {
+            cn = con.getConnection();
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            Object[] empleado = new Object[8];
+            modelo = (DefaultTableModel) tablaDatos.getModel();
+
+            while (rs.next()) {
+                empleado[0] = rs.getInt("id");
+                empleado[1] = rs.getString("firstName");
+                empleado[2] = rs.getString("lastName");
+                empleado[3] = rs.getInt("age");
+                empleado[4] = rs.getString("email");
+                empleado[5] = rs.getInt("phoneNumber");
+                empleado[6] = rs.getDouble("salary");
+                empleado[7] = rs.getString("hireDate");
+
+                modelo.addRow(empleado);
+            }
+            tablaDatos.setModel(modelo);
+        } catch (SQLException e) {
         }
     }
+
+    @SuppressWarnings("empty-statement")
+    void actualizar() {
+        int id = Integer.parseInt(txt_id.getText());
+        String firstName = txt_firstName.getText();
+        String lastName = txt_lastName.getText();
+        int age = Integer.parseInt(txt_age.getText());
+        String email = txt_email.getText();
+        int phoneNumber = Integer.parseInt(txt_phoneNumber.getText());
+        Double salary = Double.parseDouble(txt_salary.getText());
+        String hiredate = (txt_hireDate.getText().trim());
+
+        try {
+            String sql = "UPDATE  employee set id = '" + id + "',firstName = '" + firstName + "',lastName = '" + lastName + "',age = '" + age + "',email = '" + email + "',phoneNumber = '" + phoneNumber + "',salary = '" + salary + "',hiredate = '" + hiredate + "' where id = " + id;
+            cn = con.getConnection();
+            st = cn.createStatement();
+            st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "DATOS ACTUALIZADOS CORECTAMENTE");
+            limpiartable();
+
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "DATOS NO SE GUARDARON CORERECTAMENTE");
+            limpiartable();
+        }
     
+
+    }
+
+    void Agregar() {
+        int id = Integer.parseInt(txt_id.getText());
+
+        String firstName = txt_firstName.getText();
+        String lastName = txt_lastName.getText();
+        int age = Integer.parseInt(txt_age.getText());
+        String email = txt_email.getText();
+        int phoneNumber = Integer.parseInt(txt_phoneNumber.getText());
+        Double salary = Double.parseDouble(txt_salary.getText());
+        String hireDate = (txt_hireDate.getText().trim());
+
+        try {
+            String sql = "INSERT INTO employee(id, firstName, lastName, age, email, phoneNumber, salary, hireDate) values('" + id + "', '" + firstName + "', '" + lastName + "', '" + age + "', '" + email + "', '" + phoneNumber + "', '" + salary + "', '" + hireDate + "')";
+
+            cn = con.getConnection();
+            st = cn.createStatement();
+            st.executeUpdate(sql);
+
+            JOptionPane.showMessageDialog(null, "DATOS GUARDADOS CORRECTAMENTE");
+            limpiartable();
+
+        } catch (HeadlessException | SQLException E) {
+            JOptionPane.showMessageDialog(null, "DATOS NO SE GUARDARON CORRECTAMENTE");
+
+        }
+
+    }
+
+    void limpiartable() {
+        for (int i = 0; i <= tablaDatos.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i = i - 1;
+
+        }
+    }
+    void eliminar (){
+        int fila = tablaDatos.getRowCount();
+        int id = Integer.parseInt(txt_id.getText());
+        if (fila == -1){
+            JOptionPane.showMessageDialog(null, "SELECIONE UNA FILA PARA BORRAR REGISTRO");
+            
+        }else{
+            try{
+                
+                String sql = "DELETE FROM hr.Employee where id="+id;
+                cn = con.getConnection();
+                st = cn.createStatement();
+                st.executeUpdate(sql);
+                JOptionPane.showMessageDialog(null, "DATOS BORRADOS CORRECTAMENTE");
+                
+                limpiartable();
+            }catch(HeadlessException | SQLException e){
+        }
+    }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar;
